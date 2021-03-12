@@ -58,10 +58,15 @@
 //	#define DEFAULT_BLEND		BLEND_DEFAULT
 //	#define BLEND_OPTION_ADD	BLEND_COLORADD
 //	#define BLEND_OPTION_BLEND	(BLEND_COLORADD | BLEND_ALPHABLEND | BLEND_NOZWRITE)
+
+	#define ALIGN16
+
 #else
 	#define DEFAULT_BLEND		GU_TFX_MODULATE
 	#define BLEND_OPTION_ADD	GU_TFX_ADD
 	#define BLEND_OPTION_BLEND	GU_TFX_BLEND
+
+	#define ALIGN16				__attribute__((aligned(16)))
 #endif
 
 
@@ -190,7 +195,7 @@
 	#define FRAME_BUFFER_SIZE		FRAME_BUFFER_WIDTH*SCREEN_HEIGHT*PIXEL_SIZE
 
 	#define SLICE_SIZE_F			64.0f
-	typedef unsigned long DWORD;
+	typedef u32 DWORD;
 
 	#define BLEND_ZERO					0x1000
 	#define BLEND_ONE					0x1002 

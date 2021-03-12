@@ -27,6 +27,21 @@
 
 using namespace std;
 
+enum FileSystemActiveMode
+{
+	eNormal=0,
+	eZip,
+	eMpk
+};
+
+#define TILESIZE 64
+struct tile
+{
+	char path[TILESIZE-8];
+	int  size;
+	long pos;
+};
+
 //////////////////////////////////////////////////////////////////////////
 /// Interface for low level file access with ZIP archive support. All
 /// file operations in JGE are handled through this class so if a ZIP
@@ -64,6 +79,23 @@ public:
 	/// 
 	//////////////////////////////////////////////////////////////////////////
 	void DetachZipFile();
+
+	//////////////////////////////////////////////////////////////////////////
+	/// Attach MPK archive to the file system.
+	///
+	/// @param hbrfile -  Name of hbr file archive.
+	/// @param listfile - Name of list file archive.
+	/// 
+	/// @return Status of the attach operation.
+	/// 
+	//////////////////////////////////////////////////////////////////////////
+	bool AttachMpkFile(const string &hbrfile, const string &listfile);
+
+	//////////////////////////////////////////////////////////////////////////
+	/// Release the attached MPK archive.
+	/// 
+	//////////////////////////////////////////////////////////////////////////
+	void DetachMpkFile();
 	
 	//////////////////////////////////////////////////////////////////////////
 	/// Open file for reading.
@@ -93,6 +125,8 @@ public:
 	/// 
 	//////////////////////////////////////////////////////////////////////////
 	void CloseFile();
+	void CloseZipFile();
+	void CloseMpkFile();
 
 	//////////////////////////////////////////////////////////////////////////
 	/// Set root for all the following file operations
@@ -112,14 +146,33 @@ private:
 	string mResourceRoot;
 	string mZipFileName;
 	char *mPassword;
-	bool mZipAvailable;
+	string mHbrFileName;
+	string mListFileName;
+	//bool mZipAvailable;
+	FileSystemActiveMode mActiveMode;
 #ifdef WIN32
 	FILE *mFile;
+	FILE *mMpkHbrFile;
+	FILE *mMpkListFile;
 #else
 	SceUID mFile;
+	SceUID mMpkHbrFile;
+	SceUID mMpkListFile;
 #endif
 	unzFile mZipFile;
 	int mFileSize;
+
+#ifdef WIN32
+	bool GetMid(long &start, long &end, long &mid);
+	bool gettile(long s, long e, FILE* fp, tile &t);
+	bool findtile(tile &t);
+	FILE* getfilepointer(const char * filename, int &size);
+#else
+	bool GetMid(long &start, long &end, long &mid);
+	bool gettile(long s, long e, SceUID fp, tile &t);
+	bool findtile(tile &t);
+	SceUID getfilepointer(const char * filename, int &size);
+#endif
 
 };
 

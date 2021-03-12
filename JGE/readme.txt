@@ -117,6 +117,7 @@ The JGE++ Team is:
 
 Special thanks to:
 ------------------
+- Aeolusc (Character encoding conversion code)
 - Cheese (WAV playback code)
 - Cooleyes (MP3 hardware decoder)
 - Fan990099

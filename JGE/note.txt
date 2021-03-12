@@ -1,0 +1,20 @@
+		Update Notes
+---------------------------------------------------------
+- Version 1.0.1 Mon Oct 22th CST 2007
+---------------------------------------------------------
+    ///////////////////////////////////
+    / Newly added highlight features  /
+    ///////////////////////////////////
+    - Add MPK support in JFileSystem.
+
+    ///////////////////////////////////////
+    / Improvements & Resolved Issues Bugs /
+    ///////////////////////////////////////
+    - Fix a spelling mistake: 
+      JRender.h(Line 47): USING_MATCH_TABLE --> USING_MATH_TABLE
+
+    //////////////////
+    / Pending Issues /
+    //////////////////
+    - Small and double draw bug.
+

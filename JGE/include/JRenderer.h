@@ -44,7 +44,7 @@
 
 #define USING_MATH_TABLE
 
-#ifdef USING_MATCH_TABLE
+#ifdef USING_MATH_TABLE
 	#define SINF(x)		mSinTable[x]
 	#define COSF(x)		mCosTable[x]
 #else

@@ -1,0 +1,19 @@
+TARGET = Box2D
+OBJS = src/GameApp.o src/GameLauncher.o \
+		src/FlyingBox.o src/JBox2D.o src/FrictionTest.o
+
+CFLAGS = -O2 -G0 -Wall 
+CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti
+ASFLAGS = $(CXXFLAGS)
+
+INCDIR = ../../JGE/include ../../JGE/include/psp ../../JGE/include/psp/freetype2 ../../JGE/src ../../JGE/Box2D/Include
+LIBDIR = ../../JGE/lib/psp ../../JGE/Box2D/Library
+LDFLAGS =
+LIBS = -lbox2d -ljge100 -lfreetype -ljpeg -lgif -lpng -lz -lm -lmikmod -lpsppower -lpspmpeg -lpspaudiocodec -lpspaudiolib -lpspaudio -lpspgum -lpspgu -lpsprtc -lstdc++ 
+
+EXTRA_TARGETS = EBOOT.PBP
+PSP_EBOOT_TITLE = Box2D
+PSP_EBOOT_ICON = icon.png
+
+PSPSDK=$(shell psp-config --pspsdk-path)
+include $(PSPSDK)/lib/build.mak
